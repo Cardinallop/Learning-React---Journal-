@@ -1,10 +1,9 @@
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useCallback } from 'react';
+
 
 import { Button, Container, Typography } from "@mui/material";
 import Entry from "./Entry";
 import AddEntry from './AddEntry';
+import useEntries from './Hooks/useEntries';
 
 
 
@@ -12,37 +11,16 @@ import AddEntry from './AddEntry';
 
 const Journal = () => {
 
-    const [entries, setEntries] = useState([]);
-    const [initialized, setInitialized] = useState(false);
-    const [loading, setLoading] = useState(false);
+    const {
 
-    useEffect(() => {
-        if (initialized) return;
-        setInitialized(true);
+        save,
+        loading,
+        entries,
+        setEntries,
 
-        setLoading(true);
-        fetch('http://localhost:5000/entries')
-            .then(response => response.json())
-            .then(result => {
+    } = useEntries();
 
-                setEntries(result.data);
-                setLoading(false);
-            })
-    }, [initialized, setInitialized]);
-
-    const save = useCallback((entry) => {
-        setEntries([
-            entry, ...entries
-        ])
-        setLoading(true);
-        fetch('http://localhost:5000/entry', {
-            method: 'post',
-            body: JSON.stringify({ entry, }),
-            headers: { 'Content-Type': 'application/json' },
-        })
-    }, [entries]);
-
-    return (
+ return (
 
         <Container>
             <Typography variant="h1">Journal</Typography>

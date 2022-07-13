@@ -1,20 +1,22 @@
 
 import { BrowserRouter } from 'react-router-dom';
 import './App.css';
+import ErrorBoundary from './components/ErrorBoundary';
 import Header from './components/Header';
 import Router from './components/Router';
 
 function App() {
   return (
+    <ErrorBoundary>
+      <BrowserRouter>
+        <div>
 
-    <BrowserRouter>
-    <div>
-      <header>
-        <Header />
-        <Router/>
-      </header>
-    </div>
-    </BrowserRouter>
+          <Header />
+          <Router />
+
+        </div>
+      </BrowserRouter>
+    </ErrorBoundary>
   );
 }
 
