@@ -21,7 +21,7 @@ const Name = ({ user}) => (
 );
 
 const Email = ({ user}) => (
-    <a href={`mailto:${user.email}`}>{user.email</a>
+    <a href={`mailto:${user.email}`}>{user.email}<a/>
 );
 
 const Instagram = () => (
